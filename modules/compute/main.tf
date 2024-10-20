@@ -5,7 +5,7 @@ data "google_secret_manager_secret_version" "tf_secretrpw" {
 }
 
 data "google_secret_manager_secret_version" "tf_secretgitprivsshk" {
-  secret = "github-private-ssh-key"
+  secret = "secret-gcp-ssh-key"
   version = "latest"
 }
 
@@ -49,25 +49,30 @@ resource "google_compute_instance" "tf_computeinstance" {
     "user-data"             = <<-EOF
       #!/bin/bash
 
+      echo "Setting parameters ------------------------------------------"
+      export HOME=/home/guilhermeviegas1993
       echo "export cleanbucket_name=${var.cleanbucket_name}" >> /home/guilhermeviegas1993/.bashrc
       echo "export rstudio_secret=${data.google_secret_manager_secret_version.tf_secretrpw.secret_data}" >> /home/guilhermeviegas1993/.bashrc 
-      echo "${data.google_secret_manager_secret_version.tf_secretgitprivsshk.secret_data}" > /home/guilhermeviegas1993/.github-private-ssh-key
-      chmod 600 /home/guilhermeviegas1993/.github-private-ssh-key
+      mkdir -p ~/.ssh
+      echo "${data.google_secret_manager_secret_version.tf_secretgitprivsshk.secret_data}" > /home/guilhermeviegas1993/.ssh/id_rsa
+      chown guilhermeviegas1993:guilhermeviegas1993 /home/guilhermeviegas1993/.ssh/id_rsa
+      chmod 700 /home/guilhermeviegas1993/.ssh/id_rsa
 
+      echo "Update ------------------------------------------------------"
       sudo apt update -y
+      sudo apt install -y git
       
-      sudo apt install tree -y
-      
+      echo "Installs ----------------------------------------------------"
+      sudo apt install tree -y 
       sudo apt install -y docker.io
       sudo systemctl start docker
       sudo systemctl enable docker
-      
       sudo curl -L "https://github.com/docker/compose/releases/download/v2.1.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-      sudo chmod +x /usr/local/bin/docker-compose
-      
+      sudo chmod +x /usr/local/bin/docker-compose      
       sudo apt-get install nginx
       sudo systemctl enable nginx
       sudo systemctl start nginx
+
 
       sudo docker pull rocker/geospatial
 
@@ -75,6 +80,20 @@ resource "google_compute_instance" "tf_computeinstance" {
       mkdir -p /home/guilhermeviegas1993/data/curated_data/{munic,micro,meso,rgint,rgime,uf}
       sudo chmod -R 777 /home/guilhermeviegas1993/data/
       sudo gsutil -m cp -r gs://$cleanbucket_name/* /home/guilhermeviegas1993/data/clean_data      
+
+      echo "Setting repos -----------------------------------------------"
+      mkdir -p ~/.ssh
+      touch ~/.ssh/id_rsa
+      chmod 700 ~/.ssh/id_rsa
+      touch ~/.ssh/known_hosts
+      chmod 766 ~/.ssh/known_hosts
+      eval "$(ssh-agent -s)" 
+      ssh-keyscan -H github.com > ~/.ssh/known_hosts
+      git config --global user.email "guilhermeviegas1993@gmail.com"
+      git config --global user.name "Gui-go"
+      ssh-add /home/guilhermeviegas1993/.ssh/id_rsa
+      sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/personal_rstudio.git /home/guilhermeviegas1993/personal_rstudio/
+      sudo main.sh
 
       echo "VM init finished!"
 

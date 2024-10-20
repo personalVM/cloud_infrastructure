@@ -26,16 +26,26 @@ terraform init
 terraform apply
 
 terraform state list
-terraform state show google_compute_address.tf_static_ip
+terraform state show module.network.google_dns_record_set.tf_a_record
 
 
-gcloud compute ssh computeinstance-vm1
-gcloud compute ssh personalvm-vm1 --zone us-west4-b
+
+
+gcloud compute ssh personalvm-computeinstance --zone us-west4-b
+
 
 
 --
 
-git@github.com:personalVM/personal_rstudio.git
+echo "# personal_rstudio" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:personalVM/personal_rstudio.git
+git push -u origin main
+
+
 
 
 
@@ -43,8 +53,24 @@ git@github.com:personalVM/personal_rstudio.git
 --
 Extra:
 
+
+terraform state rm <resource_address>
+terraform state pull # Detailed description of the resources available
+git config --list
+git config user.name
+
 find . -type f -exec sed -i 's/old_term/new_term/g' {} +
 
+
+
+
+---
+
+
+
+
+docker build -t personal_rstudio -f rstudio.Dockerfile .
+docker run -d -v $(pwd):/home/rstudio personal_rstudio
 
 
 
