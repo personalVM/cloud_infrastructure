@@ -25,6 +25,10 @@ git clone ------ personalVM:cloud_infrastructure
 terraform init 
 terraform apply
 
+terraform state list
+terraform state show google_compute_address.tf_static_ip
+
+
 gcloud compute ssh computeinstance-vm1
 gcloud compute ssh personalvm-vm1 --zone us-west4-b
 
@@ -32,6 +36,14 @@ gcloud compute ssh personalvm-vm1 --zone us-west4-b
 --
 
 git@github.com:personalVM/personal_rstudio.git
+
+
+
+
+--
+Extra:
+
+find . -type f -exec sed -i 's/old_term/new_term/g' {} +
 
 
 

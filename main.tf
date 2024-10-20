@@ -27,7 +27,6 @@ module "compute" {
   source            = "./modules/compute"
   proj_name         = local.proj_name
   proj_id           = local.proj_id
-  svc_name          = "computeinstance-main"
   location          = local.location
   zone              = local.zone
   machine_type      = "n1-standard-4"

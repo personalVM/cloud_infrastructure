@@ -9,8 +9,8 @@ data "google_secret_manager_secret_version" "tf_secretgitprivsshk" {
   version = "latest"
 }
 
-resource "google_compute_instance" "tf_vm" {
-  name         = "${var.proj_name}-${var.svc_name}"
+resource "google_compute_instance" "tf_computeinstance" {
+  name         = "${var.proj_name}-computeinstance"
   machine_type = var.machine_type
   zone         = var.zone
   allow_stopping_for_update = true
@@ -81,7 +81,7 @@ resource "google_compute_instance" "tf_vm" {
     EOF    
   }
   service_account {
-    email  = google_service_account.tf_vm_service_account.email
+    email  = google_service_account.tf_computeinstance_service_account.email
     scopes = ["https://www.googleapis.com/auth/cloud-platform"]
   }
 }
@@ -93,14 +93,14 @@ resource "google_compute_instance" "tf_vm" {
 #   zone  = var.zone
 # }
 
-resource "google_service_account" "tf_vm_service_account" {
-  account_id   = "${var.svc_name}-serviceaccount"
+resource "google_service_account" "tf_computeinstance_service_account" {
+  account_id   = "${var.proj_name}-serviceaccount"
   display_name = "Service account for VM to access GCS"
 }
 
-resource "google_project_iam_member" "tf_vm_storage_access" {
+resource "google_project_iam_member" "tf_computeinstance_storage_access" {
   project = var.proj_id
   role    = "roles/storage.objectViewer"
-  member  = "serviceAccount:${google_service_account.tf_vm_service_account.email}"
+  member  = "serviceAccount:${google_service_account.tf_computeinstance_service_account.email}"
 }
 
