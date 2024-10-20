@@ -34,7 +34,12 @@ variable "tag_owner" {
 }
 
 variable "network_name" {
-  description = "Output from network module"
+  description = "Output from network module - network name"
+  type        = string
+}
+
+variable "static_ip_address" {
+  description = "Output from network module - static IP address"
   type        = string
 }
 

@@ -4,10 +4,15 @@ resource "google_storage_bucket" "tf_rawbucket" {
   project       = var.proj_id
   location      = var.location
   storage_class = "COLDLINE" # NEARLINE COLDLINE ARCHIVE
-  # logging {
-  #   log_bucket        = google_storage_bucket.tfgcplogbucket.name
-  #   log_object_prefix = "logs/"
-  # }
+  lifecycle_rule {
+    action {
+      type          = "SetStorageClass"
+      storage_class = "ARCHIVE"
+    }
+    condition {
+      age = 180 # Move to ARCHIVE after 180 days
+    }
+  }
   labels = {
     environment = "varproj_name"
     project     = var.proj_id

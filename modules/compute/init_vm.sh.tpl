@@ -1,7 +1,5 @@
 #!/bin/bash
 
-touch abcddgggg.txt
-
 sudo apt update -y
       
 sudo apt install tree -y
@@ -21,3 +19,5 @@ sudo docker pull rocker/geospatial
 
 mkdir -p /home/guilhermeviegas1993/data/clean_data/{munic,micro,meso,rgint,rgime,uf}
 mkdir -p /home/guilhermeviegas1993/data/curated_data/{munic,micro,meso,rgint,rgime,uf}
+
+

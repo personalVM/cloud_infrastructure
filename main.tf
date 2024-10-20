@@ -23,18 +23,19 @@ module "datalake" {
   tag_owner = local.tag_owner
 }
 
-module "compute1" {
-  source           = "./modules/compute"
-  proj_name        = local.proj_name
-  proj_id          = local.proj_id
-  svc_name         = "vm1"
-  location         = local.location
-  zone             = local.zone
-  machine_type     = "n1-standard-4"
-  tag_owner        = local.tag_owner
-  network_name     = module.network.vpc_network_name
-  cleanbucket_name = module.datalake.output_tf_cleanbucket_name
-  gpu_enabled      = false
+module "compute" {
+  source            = "./modules/compute"
+  proj_name         = local.proj_name
+  proj_id           = local.proj_id
+  svc_name          = "computeinstance-main"
+  location          = local.location
+  zone              = local.zone
+  machine_type      = "n1-standard-4"
+  tag_owner         = local.tag_owner
+  network_name      = module.network.vpc_network_name
+  static_ip_address = module.network.static_ip_address
+  cleanbucket_name  = module.datalake.cleanbucket_name
+  gpu_enabled       = false
 }
 
 # module "compute2" {

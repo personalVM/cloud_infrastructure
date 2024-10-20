@@ -44,5 +44,31 @@ resource "google_compute_firewall" "tf_https" {
   source_ranges = ["0.0.0.0/0"]
 }
 
+resource "google_compute_address" "tf_static_ip" {
+  name         = "${var.proj_name}-static-ip"
+  region       = var.location
+}
+
+resource "google_dns_managed_zone" "tf_dns_zone" {
+  name        = "${var.proj_name}-dns-zone"
+  dns_name    = "guigo.dev.br."
+  description = "My DNS zone"
+}
+
+resource "google_dns_record_set" "tf_a_record" {
+  name         = "guigo.dev.br."
+  managed_zone = google_dns_managed_zone.tf_dns_zone.name
+  type         = "A"
+  ttl          = 300
+  rrdatas      = [google_compute_address.tf_static_ip.address]
+}
+
+resource "google_dns_record_set" "tf_www_a_record" {
+  name         = "www.guigo.dev.br."
+  managed_zone = google_dns_managed_zone.tf_dns_zone.name
+  type         = "A"
+  ttl          = 300
+  rrdatas      = [google_compute_address.tf_static_ip.address]
+}
 
 
