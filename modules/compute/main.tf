@@ -57,6 +57,7 @@ resource "google_compute_instance" "tf_computeinstance" {
       echo "${data.google_secret_manager_secret_version.tf_secretgitprivsshk.secret_data}" > /home/guilhermeviegas1993/.ssh/id_rsa
       chown guilhermeviegas1993:guilhermeviegas1993 /home/guilhermeviegas1993/.ssh/id_rsa
       chmod 700 /home/guilhermeviegas1993/.ssh/id_rsa
+      sudo chown -R guilhermeviegas1993:guilhermeviegas1993 /home/guilhermeviegas1993/
 
       echo "Update ------------------------------------------------------"
       sudo apt update -y
@@ -73,13 +74,11 @@ resource "google_compute_instance" "tf_computeinstance" {
       sudo systemctl enable nginx
       sudo systemctl start nginx
 
-
-      sudo docker pull rocker/geospatial
-
+      echo "Data --------------------------------------------------------"
       mkdir -p /home/guilhermeviegas1993/data/clean_data/{munic,micro,meso,rgint,rgime,uf}
       mkdir -p /home/guilhermeviegas1993/data/curated_data/{munic,micro,meso,rgint,rgime,uf}
       sudo chmod -R 777 /home/guilhermeviegas1993/data/
-      sudo gsutil -m cp -r gs://$cleanbucket_name/* /home/guilhermeviegas1993/data/clean_data      
+      sudo gsutil -m cp -r gs://${var.cleanbucket_name}/* /home/guilhermeviegas1993/data/clean_data      
 
       echo "Setting repos -----------------------------------------------"
       mkdir -p ~/.ssh
@@ -93,17 +92,19 @@ resource "google_compute_instance" "tf_computeinstance" {
       git config --global user.name "Gui-go"
       ssh-add /home/guilhermeviegas1993/.ssh/id_rsa
 
+      echo "personal_rstudio repo -----------------------------------------------"
+      sudo git clone git@github.com:personalVM/personal_rstudio.git /home/guilhermeviegas1993/personal_rstudio/
+      sudo R_PASS=${data.google_secret_manager_secret_version.tf_secretrpw.secret_data} docker-compose -f /home/guilhermeviegas1993/personal_rstudio/docker-compose.yml up -d --build
+      sudo docker exec -t personal_rstudio bash -c 'chown -R rstudio:rstudio /home/rstudio/volume/'
+      sudo docker ps
 
-      sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/personal_rstudio.git /home/guilhermeviegas1993/personal_rstudio/
-      # sudo sh personal_rstudio/main.sh
-      sudo docker run -d -p 8787:8787 --name rstudio -e ROOT=true -e USER=rstudio -e PASSWORD=rstudio --user root rocker/geospatial
+      echo "ETL repo -----------------------------------------------"
+      sudo git clone git@github.com:personalVM/etl.git /home/guilhermeviegas1993/etl/
 
-      sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/etl.git /home/guilhermeviegas1993/personal_rstudio/etl/
+      echo "Geo Portfolio repo -----------------------------------------------"
+      sudo git clone git@github.com:personalVM/geo_portfolio.git /home/guilhermeviegas1993/geo_portfolio/
 
-      sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/geo_portfolio.git /home/guilhermeviegas1993/geo_portfolio/
-
-
-      echo "VM init finished!"
+      echo "VM init finished! --"
 
     EOF    
   }

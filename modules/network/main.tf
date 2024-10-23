@@ -14,16 +14,6 @@ resource "google_compute_firewall" "tf_fw_ssh" {
   source_ranges = ["0.0.0.0/0"]
 }
 
-resource "google_compute_firewall" "tf_fw_rstudio" {
-  name    = "${var.proj_name}-allow-rstudio"
-  network = google_compute_network.tf_vpc.name
-  allow {
-    protocol = "tcp"
-    ports    = ["8787"]
-  }
-  source_ranges = ["0.0.0.0/0"]
-}
-
 resource "google_compute_firewall" "tf_fw_http" {
   name    = "${var.proj_name}-http"
   network = google_compute_network.tf_vpc.name
@@ -45,11 +35,21 @@ resource "google_compute_firewall" "tf_fw_https" {
 }
 
 resource "google_compute_firewall" "tf_fw_postgres" {
-  name    = "${var.proj_name}-https"
+  name    = "${var.proj_name}-postgres"
   network = google_compute_network.tf_vpc.name
   allow {
     protocol = "tcp"
     ports    = ["5432"]
+  }
+  source_ranges = ["0.0.0.0/0"]
+}
+
+resource "google_compute_firewall" "tf_fw_rstudio" {
+  name    = "${var.proj_name}-allow-rstudio"
+  network = google_compute_network.tf_vpc.name
+  allow {
+    protocol = "tcp"
+    ports    = ["8787"]
   }
   source_ranges = ["0.0.0.0/0"]
 }

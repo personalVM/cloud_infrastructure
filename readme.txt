@@ -80,3 +80,8 @@ docker-compose up --build
 
 
 
+sudo docker run -d -e PASSWORD=minhasenha -p 8787:8787 -v /home/guilhermeviegas1993/:/home/rstudio/ --name=personal_rstudio_ctn "$img_id"
+sudo docker run -d -e PASSWORD=minhasenha -p 8787:8787 -v ~/:/home/rstudio/ --name=personal_rstudio_ctn "$img_id"
+sudo docker run -d -e PASSWORD=minhasenha -p 8787:8787 --name=personal_rstudio_ctn "$img_id"
+
+
