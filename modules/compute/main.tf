@@ -92,8 +92,16 @@ resource "google_compute_instance" "tf_computeinstance" {
       git config --global user.email "guilhermeviegas1993@gmail.com"
       git config --global user.name "Gui-go"
       ssh-add /home/guilhermeviegas1993/.ssh/id_rsa
+
+
       sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/personal_rstudio.git /home/guilhermeviegas1993/personal_rstudio/
-      sudo main.sh
+      # sudo sh personal_rstudio/main.sh
+      sudo docker run -d -p 8787:8787 --name rstudio -e ROOT=true -e USER=rstudio -e PASSWORD=rstudio --user root rocker/geospatial
+
+      sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/etl.git /home/guilhermeviegas1993/personal_rstudio/etl/
+
+      sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/geo_portfolio.git /home/guilhermeviegas1993/geo_portfolio/
+
 
       echo "VM init finished!"
 

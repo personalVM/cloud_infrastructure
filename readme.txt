@@ -58,10 +58,11 @@ terraform state rm <resource_address>
 terraform state pull # Detailed description of the resources available
 git config --list
 git config user.name
-
+nslookup guigo.dev.br
 find . -type f -exec sed -i 's/old_term/new_term/g' {} +
 
 
+sudo docker run -d -p 8787:8787 --name rstudio -e ROOT=true -e USER=rstudio -e PASSWORD=rstudio --user root rocker/geospatial
 
 
 ---
@@ -71,6 +72,11 @@ find . -type f -exec sed -i 's/old_term/new_term/g' {} +
 
 docker build -t personal_rstudio -f rstudio.Dockerfile .
 docker run -d -v $(pwd):/home/rstudio personal_rstudio
+
+
+
+docker-compose up --build
+
 
 
 
