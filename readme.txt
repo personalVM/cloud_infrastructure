@@ -85,3 +85,4 @@ sudo docker run -d -e PASSWORD=minhasenha -p 8787:8787 -v ~/:/home/rstudio/ --na
 sudo docker run -d -e PASSWORD=minhasenha -p 8787:8787 --name=personal_rstudio_ctn "$img_id"
 
 
+sudo docker inspect personal_rstudio  | grep -i 'password'
