@@ -55,6 +55,7 @@ Extra:
 
 
 terraform state rm <resource_address>
+terraform state list
 terraform state pull # Detailed description of the resources available
 git config --list
 git config user.name
@@ -86,3 +87,18 @@ sudo docker run -d -e PASSWORD=minhasenha -p 8787:8787 --name=personal_rstudio_c
 
 
 sudo docker inspect personal_rstudio  | grep -i 'password'
+
+
+sudo env POSTGRES_USER=guigo POSTGRES_PASSWORD=passwd GEOSERVER_ADMIN_USER=guigo GEOSERVER_ADMIN_PASSWORD=passwd docker-compose -f /home/guilhermeviegas1993/database/docker-compose.yaml up -d
+
+docker exec -it postgres psql -U guigo -c "\du"
+
+psql -U guigo -d mydb
+\l
+\c mydb
+\dt
+\d table_name
+SELECT * FROM table_name LIMIT 10;
+SELECT version();
+\du
+

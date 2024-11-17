@@ -43,6 +43,11 @@ variable "cleanbucket_name" {
   type        = string
 }
 
+variable "curatedbucket_name" {
+  description = "Name of the Cloud Storage Curated Bucket"
+  type        = string
+}
+
 variable "gpu_enabled" {
   description = "Whether to enable GPU"
   type        = bool

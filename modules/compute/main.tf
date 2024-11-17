@@ -72,6 +72,7 @@ resource "google_compute_instance" "tf_computeinstance" {
       
       echo "Installs ----------------------------------------------------"
       sudo apt install tree -y 
+      sudo apt install unzip -y
       sudo apt install -y docker.io
       sudo systemctl start docker
       sudo systemctl enable docker
@@ -82,10 +83,11 @@ resource "google_compute_instance" "tf_computeinstance" {
       sudo systemctl start nginx
 
       echo "Data --------------------------------------------------------"
-      mkdir -p /home/guilhermeviegas1993/data/clean_data/{munic,micro,meso,rgint,rgime,uf}
-      mkdir -p /home/guilhermeviegas1993/data/curated_data/{munic,micro,meso,rgint,rgime,uf}
+      mkdir -p /home/guilhermeviegas1993/data/clean_data/{munic,micro,meso,rgime,rgint,state,region}
+      mkdir -p /home/guilhermeviegas1993/data/curated_data/{munic,micro,meso,rgime,rgint,state,region}
       sudo chmod -R 777 /home/guilhermeviegas1993/data/
-      # sudo gsutil -m cp -r gs://${var.cleanbucket_name}/* /home/guilhermeviegas1993/data/clean_data      
+      # sudo gsutil -m cp -r gs://${var.cleanbucket_name}/* /home/guilhermeviegas1993/data/clean_data
+      # sudo gsutil -m cp -r gs://${var.curatedbucket_name}/* /home/guilhermeviegas1993/data/curated_data
 
       echo "Setting repos -----------------------------------------------"
       mkdir -p ~/.ssh
@@ -113,8 +115,8 @@ resource "google_compute_instance" "tf_computeinstance" {
       # sudo chown -R guilhermeviegas1993:guilhermeviegas1993 /home/guilhermeviegas1993/etl
 
       echo "Geo Portfolio repo -----------------------------------------------"
-      sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/geo_portfolio.git /home/guilhermeviegas1993/geo_portfolio/
-      sudo git config --global --add safe.directory /home/guilhermeviegas1993/geo_portfolio
+      # sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/geo_portfolio.git /home/guilhermeviegas1993/geo_portfolio/
+      # sudo git config --global --add safe.directory /home/guilhermeviegas1993/geo_portfolio
 
       echo "Database repo -----------------------------------------------------"
       sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/database.git /home/guilhermeviegas1993/database/
@@ -130,10 +132,12 @@ resource "google_compute_instance" "tf_computeinstance" {
       sudo git config --global --add safe.directory /home/guilhermeviegas1993/personal_rstudio
       sudo env R_PASS=${data.google_secret_manager_secret_version.tf_mainsecret.secret_data} \
         docker-compose -f /home/guilhermeviegas1993/personal_rstudio/docker-compose.yml up -d --build
-      sudo docker exec -t personal_rstudio bash -c 'chown -R rstudio:rstudio /home/rstudio/volume/'
+      # sudo env R_PASS=passwd docker-compose -f /home/guilhermeviegas1993/personal_rstudio/docker-compose.yml up -d --build
+      
+      sudo docker exec -t posit bash -c 'chown -R rstudio:rstudio /home/rstudio/volume/'
       sudo docker ps
 
-      sudo docker exec -t personal_rstudio bash -c '
+      sudo docker exec -t posit bash -c '
         sudo apt update -y
         sudo apt install tree -y
         sudo mkdir -p ~/.ssh
@@ -148,11 +152,15 @@ resource "google_compute_instance" "tf_computeinstance" {
         sudo git config --global user.name "Gui-go"
         sudo git config --global --add safe.directory /home/rstudio/volume/etl/
         sudo chmod -R 777 /home/rstudio/volume/etl/
+
+
       '
+
+      # tail -f /var/log/cloud-init-output.log
 
       echo "VM init finished!"
 
-    EOF    
+    EOF
   }
   service_account {
     email  = google_service_account.tf_computeinstance_service_account.email
