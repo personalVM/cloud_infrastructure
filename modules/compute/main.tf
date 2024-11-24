@@ -86,7 +86,7 @@ resource "google_compute_instance" "tf_computeinstance" {
       mkdir -p /home/guilhermeviegas1993/data/clean_data/{munic,micro,meso,rgime,rgint,state,region}
       mkdir -p /home/guilhermeviegas1993/data/curated_data/{munic,micro,meso,rgime,rgint,state,region}
       sudo chmod -R 777 /home/guilhermeviegas1993/data/
-      # sudo gsutil -m cp -r gs://${var.cleanbucket_name}/* /home/guilhermeviegas1993/data/clean_data
+      sudo gsutil -m cp -r gs://${var.cleanbucket_name}/* /home/guilhermeviegas1993/data/clean_data
       # sudo gsutil -m cp -r gs://${var.curatedbucket_name}/* /home/guilhermeviegas1993/data/curated_data
 
       echo "Setting repos -----------------------------------------------"
@@ -101,6 +101,13 @@ resource "google_compute_instance" "tf_computeinstance" {
       git config --global user.email "guilhermeviegas1993@gmail.com"
       git config --global user.name "Gui-go"
 
+
+
+      echo "simple_web80 repo --------------------------------------"
+      sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/simple_web80.git /home/guilhermeviegas1993/simple_web80/
+      sudo git config --global --add safe.directory /home/guilhermeviegas1993/simple_web80
+      sudo sh /home/guilhermeviegas1993/simple_web80/init.sh
+
       echo "ETL repo -----------------------------------------------"
       sudo mkdir -p /home/guilhermeviegas1993/etl
       sudo chown -R guilhermeviegas1993:guilhermeviegas1993 /home/guilhermeviegas1993/etl
@@ -113,6 +120,9 @@ resource "google_compute_instance" "tf_computeinstance" {
       sudo -u guilhermeviegas1993 ssh -T git@github.com
       sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/etl.git /home/guilhermeviegas1993/etl/
       # sudo chown -R guilhermeviegas1993:guilhermeviegas1993 /home/guilhermeviegas1993/etl
+
+      # Simple UI port 80 repo -----------------------------------------------"
+      ##
 
       echo "Geo Portfolio repo -----------------------------------------------"
       # sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/geo_portfolio.git /home/guilhermeviegas1993/geo_portfolio/
@@ -153,8 +163,15 @@ resource "google_compute_instance" "tf_computeinstance" {
         sudo git config --global --add safe.directory /home/rstudio/volume/etl/
         sudo chmod -R 777 /home/rstudio/volume/etl/
 
+        Rscript /home/rstudio/volume/etl/main_pipeline.R > output.log
 
       '
+
+      # sudo gsutil -m cp -r /home/guilhermeviegas1993/data/curated_data/micro/* gs://personalvm-curatedbucket/micro
+
+      # sudo gsutil -m cp -r gs://${var.curatedbucket_name}/* /home/guilhermeviegas1993/data/curated_data
+      # personalvm-curatedbucket
+
 
       # tail -f /var/log/cloud-init-output.log
 
@@ -180,9 +197,15 @@ resource "google_service_account" "tf_computeinstance_service_account" {
   display_name = "Service account for VM to access GCS"
 }
 
-resource "google_project_iam_member" "tf_computeinstance_storage_access" {
+resource "google_project_iam_member" "tf_computeinstance_storageViewer_access" {
   project = var.proj_id
   role    = "roles/storage.objectViewer"
+  member  = "serviceAccount:${google_service_account.tf_computeinstance_service_account.email}"
+}
+
+resource "google_project_iam_member" "tf_computeinstance_storageCreator_access" {
+  project = var.proj_id
+  role    = "roles/storage.objectCreator"
   member  = "serviceAccount:${google_service_account.tf_computeinstance_service_account.email}"
 }
 

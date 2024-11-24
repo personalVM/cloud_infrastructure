@@ -23,6 +23,16 @@ module "datalake" {
   tag_owner = local.tag_owner
 }
 
+module "datawarehouse" {
+  source      = "./modules/datawarehouse"
+  proj_name   = local.proj_name
+  proj_id     = local.proj_id
+  # svc_name    = local.svc_name
+  location    = local.location
+  # bucket_name = local.bucket_name
+}
+
+
 module "compute" {
   source              = "./modules/compute"
   proj_name           = local.proj_name
