@@ -86,7 +86,7 @@ resource "google_compute_instance" "tf_computeinstance" {
       mkdir -p /home/guilhermeviegas1993/data/clean_data/{munic,micro,meso,rgime,rgint,state,region}
       mkdir -p /home/guilhermeviegas1993/data/curated_data/{munic,micro,meso,rgime,rgint,state,region}
       sudo chmod -R 777 /home/guilhermeviegas1993/data/
-      sudo gsutil -m cp -r gs://${var.cleanbucket_name}/* /home/guilhermeviegas1993/data/clean_data
+      # sudo gsutil -m cp -r gs://${var.cleanbucket_name}/* /home/guilhermeviegas1993/data/clean_data
       # sudo gsutil -m cp -r gs://${var.curatedbucket_name}/* /home/guilhermeviegas1993/data/curated_data
 
       echo "Setting repos -----------------------------------------------"
@@ -100,8 +100,6 @@ resource "google_compute_instance" "tf_computeinstance" {
       ssh-add ~/.ssh/id_rsa
       git config --global user.email "guilhermeviegas1993@gmail.com"
       git config --global user.name "Gui-go"
-
-
 
       echo "simple_web80 repo --------------------------------------"
       sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/simple_web80.git /home/guilhermeviegas1993/simple_web80/
@@ -143,7 +141,6 @@ resource "google_compute_instance" "tf_computeinstance" {
       sudo env R_PASS=${data.google_secret_manager_secret_version.tf_mainsecret.secret_data} \
         docker-compose -f /home/guilhermeviegas1993/personal_rstudio/docker-compose.yml up -d --build
       # sudo env R_PASS=passwd docker-compose -f /home/guilhermeviegas1993/personal_rstudio/docker-compose.yml up -d --build
-      
       sudo docker exec -t posit bash -c 'chown -R rstudio:rstudio /home/rstudio/volume/'
       sudo docker ps
 
@@ -163,7 +160,7 @@ resource "google_compute_instance" "tf_computeinstance" {
         sudo git config --global --add safe.directory /home/rstudio/volume/etl/
         sudo chmod -R 777 /home/rstudio/volume/etl/
 
-        Rscript /home/rstudio/volume/etl/main_pipeline.R > output.log
+        # Rscript /home/rstudio/volume/etl/main_pipeline.R > output.log
 
       '
 
@@ -171,7 +168,6 @@ resource "google_compute_instance" "tf_computeinstance" {
 
       # sudo gsutil -m cp -r gs://${var.curatedbucket_name}/* /home/guilhermeviegas1993/data/curated_data
       # personalvm-curatedbucket
-
 
       # tail -f /var/log/cloud-init-output.log
 
