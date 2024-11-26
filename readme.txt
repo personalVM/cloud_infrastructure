@@ -24,12 +24,9 @@ git clone ------ personalVM:cloud_infrastructure
 
 terraform init 
 terraform apply
-
 terraform state list
+
 terraform state show module.network.google_dns_record_set.tf_a_record
-
-
-
 
 gcloud compute ssh personalvm-computeinstance --zone us-west4-b
 

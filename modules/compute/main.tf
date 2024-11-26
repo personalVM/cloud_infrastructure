@@ -68,9 +68,10 @@ resource "google_compute_instance" "tf_computeinstance" {
 
       echo "Update ------------------------------------------------------"
       sudo apt update -y
-      sudo apt install -y git
+      sudo apt upgrade -y
       
       echo "Installs ----------------------------------------------------"
+      sudo apt install -y git
       sudo apt install tree -y 
       sudo apt install unzip -y
       sudo apt install -y docker.io
@@ -78,18 +79,18 @@ resource "google_compute_instance" "tf_computeinstance" {
       sudo systemctl enable docker
       sudo curl -L "https://github.com/docker/compose/releases/download/v2.1.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
       sudo chmod +x /usr/local/bin/docker-compose      
-      sudo apt install -y nginx
-      sudo systemctl enable nginx
-      sudo systemctl start nginx
+      # sudo apt install -y nginx
+      # sudo systemctl enable nginx
+      # sudo systemctl start nginx
 
       echo "Data --------------------------------------------------------"
       mkdir -p /home/guilhermeviegas1993/data/clean_data/{munic,micro,meso,rgime,rgint,state,region}
       mkdir -p /home/guilhermeviegas1993/data/curated_data/{munic,micro,meso,rgime,rgint,state,region}
       sudo chmod -R 777 /home/guilhermeviegas1993/data/
-      # sudo gsutil -m cp -r gs://${var.cleanbucket_name}/* /home/guilhermeviegas1993/data/clean_data
+      sudo gsutil -m cp -r gs://${var.cleanbucket_name}/* /home/guilhermeviegas1993/data/clean_data
       # sudo gsutil -m cp -r gs://${var.curatedbucket_name}/* /home/guilhermeviegas1993/data/curated_data
 
-      echo "Setting repos -----------------------------------------------"
+      echo "Setting-up git -----------------------------------------------"
       mkdir -p ~/.ssh
       chmod 700 ~/.ssh
       touch ~/.ssh/id_rsa
@@ -101,39 +102,12 @@ resource "google_compute_instance" "tf_computeinstance" {
       git config --global user.email "guilhermeviegas1993@gmail.com"
       git config --global user.name "Gui-go"
 
-      echo "simple_web80 repo --------------------------------------"
-      sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/simple_web80.git /home/guilhermeviegas1993/simple_web80/
-      sudo git config --global --add safe.directory /home/guilhermeviegas1993/simple_web80
-      sudo sh /home/guilhermeviegas1993/simple_web80/init.sh
-
-      echo "ETL repo -----------------------------------------------"
-      sudo mkdir -p /home/guilhermeviegas1993/etl
-      sudo chown -R guilhermeviegas1993:guilhermeviegas1993 /home/guilhermeviegas1993/etl
-      sudo chown -R guilhermeviegas1993:guilhermeviegas1993 /home/guilhermeviegas1993
-      sudo chmod 700 /home/guilhermeviegas1993/.ssh
-      sudo chmod 600 /home/guilhermeviegas1993/.ssh/id_rsa
-      eval "$(ssh-agent -s)"
-      sudo -u guilhermeviegas1993 ssh-add ~/.ssh/id_rsa
-      sudo -u guilhermeviegas1993 ssh-keyscan -H github.com >> ~/.ssh/known_hosts
-      sudo -u guilhermeviegas1993 ssh -T git@github.com
-      sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/etl.git /home/guilhermeviegas1993/etl/
-      # sudo chown -R guilhermeviegas1993:guilhermeviegas1993 /home/guilhermeviegas1993/etl
-
       # Simple UI port 80 repo -----------------------------------------------"
-      ##
-
-      echo "Geo Portfolio repo -----------------------------------------------"
-      # sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/geo_portfolio.git /home/guilhermeviegas1993/geo_portfolio/
-      # sudo git config --global --add safe.directory /home/guilhermeviegas1993/geo_portfolio
-
-      echo "Database repo -----------------------------------------------------"
-      sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/database.git /home/guilhermeviegas1993/database/
-      sudo git config --global --add safe.directory /home/guilhermeviegas1993/database
-      sudo env POSTGRES_USER=${data.google_secret_manager_secret_version.tf_mainuser.secret_data} \
-        POSTGRES_PASSWORD=${data.google_secret_manager_secret_version.tf_mainsecret.secret_data} \
-        GEOSERVER_ADMIN_USER=${data.google_secret_manager_secret_version.tf_mainuser.secret_data} \
-        GEOSERVER_ADMIN_PASSWORD=${data.google_secret_manager_secret_version.tf_mainsecret.secret_data} \
-        docker-compose -f /home/guilhermeviegas1993/database/docker-compose.yaml up -d
+      sudo git clone https://github.com/personalVM/simple_web80.git
+      sudo git config --global --add safe.directory /home/guilhermeviegas1993/simple_web80
+      cd simple_web80
+      sudo docker-compose up -d
+      cd
 
       echo "Personal RStudio repo -----------------------------------------------"
       sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/personal_rstudio.git /home/guilhermeviegas1993/personal_rstudio/
@@ -159,13 +133,36 @@ resource "google_compute_instance" "tf_computeinstance" {
         sudo git config --global user.name "Gui-go"
         sudo git config --global --add safe.directory /home/rstudio/volume/etl/
         sudo chmod -R 777 /home/rstudio/volume/etl/
-
-        # Rscript /home/rstudio/volume/etl/main_pipeline.R > output.log
-
       '
 
-      # sudo gsutil -m cp -r /home/guilhermeviegas1993/data/curated_data/micro/* gs://personalvm-curatedbucket/micro
+      echo "ETL repo -----------------------------------------------"
+      sudo mkdir -p /home/guilhermeviegas1993/etl
+      sudo chown -R guilhermeviegas1993:guilhermeviegas1993 /home/guilhermeviegas1993/etl
+      sudo chown -R guilhermeviegas1993:guilhermeviegas1993 /home/guilhermeviegas1993
+      sudo chmod 700 /home/guilhermeviegas1993/.ssh
+      sudo chmod 600 /home/guilhermeviegas1993/.ssh/id_rsa
+      eval "$(ssh-agent -s)"
+      sudo -u guilhermeviegas1993 ssh-add ~/.ssh/id_rsa
+      sudo -u guilhermeviegas1993 ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+      sudo -u guilhermeviegas1993 ssh -T git@github.com
+      sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/etl.git /home/guilhermeviegas1993/etl/
+      # sudo chown -R guilhermeviegas1993:guilhermeviegas1993 /home/guilhermeviegas1993/etl
+      Rscript /home/rstudio/volume/etl/main_pipeline.R
 
+      # echo "Geo Portfolio repo -----------------------------------------------"
+      # sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/geo_portfolio.git /home/guilhermeviegas1993/geo_portfolio/
+      # sudo git config --global --add safe.directory /home/guilhermeviegas1993/geo_portfolio
+
+      echo "Database repo -----------------------------------------------------"
+      sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/database.git /home/guilhermeviegas1993/database/
+      sudo git config --global --add safe.directory /home/guilhermeviegas1993/database
+      sudo env POSTGRES_USER=${data.google_secret_manager_secret_version.tf_mainuser.secret_data} \
+        POSTGRES_PASSWORD=${data.google_secret_manager_secret_version.tf_mainsecret.secret_data} \
+        GEOSERVER_ADMIN_USER=${data.google_secret_manager_secret_version.tf_mainuser.secret_data} \
+        GEOSERVER_ADMIN_PASSWORD=${data.google_secret_manager_secret_version.tf_mainsecret.secret_data} \
+        docker-compose -f /home/guilhermeviegas1993/database/docker-compose.yaml up -d
+
+      # sudo gsutil -m cp -r /home/guilhermeviegas1993/data/curated_data/micro/* gs://personalvm-curatedbucket/micro
       # sudo gsutil -m cp -r gs://${var.curatedbucket_name}/* /home/guilhermeviegas1993/data/curated_data
       # personalvm-curatedbucket
 
