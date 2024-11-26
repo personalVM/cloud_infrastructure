@@ -105,7 +105,9 @@ resource "google_compute_instance" "tf_computeinstance" {
       # Simple UI port 80 repo -----------------------------------------------"
       sudo -u guilhermeviegas1993 git git@github.com:personalVM/simple_web80.git
       sudo git config --global --add safe.directory /home/guilhermeviegas1993/simple_web80
+      cd simple_web80/
       docker-compose -f /home/guilhermeviegas1993/simple_web80/docker-compose.yaml up -d
+      cd
 
       echo "Personal RStudio repo -----------------------------------------------"
       sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/personal_rstudio.git /home/guilhermeviegas1993/personal_rstudio/
@@ -113,9 +115,9 @@ resource "google_compute_instance" "tf_computeinstance" {
       sudo env R_PASS=${data.google_secret_manager_secret_version.tf_mainsecret.secret_data} \
         docker-compose -f /home/guilhermeviegas1993/personal_rstudio/docker-compose.yml up -d --build
       # sudo env R_PASS=passwd docker-compose -f /home/guilhermeviegas1993/personal_rstudio/docker-compose.yml up -d --build
+      
       sudo docker exec -t posit bash -c 'chown -R rstudio:rstudio /home/rstudio/volume/'
       sudo docker ps
-
       sudo docker exec -t posit bash -c '
         sudo apt update -y
         sudo apt install tree -y
@@ -131,6 +133,7 @@ resource "google_compute_instance" "tf_computeinstance" {
         sudo git config --global user.name "Gui-go"
         sudo git config --global --add safe.directory /home/rstudio/volume/etl/
         sudo chmod -R 777 /home/rstudio/volume/etl/
+        Rscript /home/rstudio/volume/etl/main_pipeline.R
       '
 
       echo "ETL repo -----------------------------------------------"
@@ -163,6 +166,7 @@ resource "google_compute_instance" "tf_computeinstance" {
       # sudo gsutil -m cp -r /home/guilhermeviegas1993/data/curated_data/micro/* gs://personalvm-curatedbucket/micro
       # sudo gsutil -m cp -r gs://${var.curatedbucket_name}/* /home/guilhermeviegas1993/data/curated_data
       # personalvm-curatedbucket
+
 
       # tail -f /var/log/cloud-init-output.log
 
