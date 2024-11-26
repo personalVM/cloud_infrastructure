@@ -79,9 +79,9 @@ resource "google_compute_instance" "tf_computeinstance" {
       sudo systemctl enable docker
       sudo curl -L "https://github.com/docker/compose/releases/download/v2.1.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
       sudo chmod +x /usr/local/bin/docker-compose      
-      sudo apt install -y nginx
-      sudo systemctl enable nginx
-      sudo systemctl start nginx
+      # sudo apt install -y nginx
+      # sudo systemctl enable nginx
+      # sudo systemctl start nginx
 
       echo "Data --------------------------------------------------------"
       mkdir -p /home/guilhermeviegas1993/data/clean_data/{munic,micro,meso,rgime,rgint,state,region}
@@ -103,23 +103,9 @@ resource "google_compute_instance" "tf_computeinstance" {
       git config --global user.name "Gui-go"
 
       # Simple UI port 80 repo -----------------------------------------------"
-      ##
-<<<<<<< HEAD
-=======
-
-      echo "Geo Portfolio repo -----------------------------------------------"
-      # sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/geo_portfolio.git /home/guilhermeviegas1993/geo_portfolio/
-      # sudo git config --global --add safe.directory /home/guilhermeviegas1993/geo_portfolio
-
-      echo "Database repo -----------------------------------------------------"
-      sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/database.git /home/guilhermeviegas1993/database/
-      sudo git config --global --add safe.directory /home/guilhermeviegas1993/database
-      sudo env POSTGRES_USER=${data.google_secret_manager_secret_version.tf_mainuser.secret_data} \
-        POSTGRES_PASSWORD=${data.google_secret_manager_secret_version.tf_mainsecret.secret_data} \
-        GEOSERVER_ADMIN_USER=${data.google_secret_manager_secret_version.tf_mainuser.secret_data} \
-        GEOSERVER_ADMIN_PASSWORD=${data.google_secret_manager_secret_version.tf_mainsecret.secret_data} \
-        docker-compose -f /home/guilhermeviegas1993/database/docker-compose.yaml up -d
->>>>>>> parent of e5ac61b (update)
+      sudo -u guilhermeviegas1993 git git@github.com:personalVM/simple_web80.git
+      sudo git config --global --add safe.directory /home/guilhermeviegas1993/simple_web80
+      docker-compose -f /home/guilhermeviegas1993/simple_web80/docker-compose.yaml up -d
 
       echo "Personal RStudio repo -----------------------------------------------"
       sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/personal_rstudio.git /home/guilhermeviegas1993/personal_rstudio/
