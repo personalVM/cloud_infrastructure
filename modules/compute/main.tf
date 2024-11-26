@@ -79,9 +79,9 @@ resource "google_compute_instance" "tf_computeinstance" {
       sudo systemctl enable docker
       sudo curl -L "https://github.com/docker/compose/releases/download/v2.1.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
       sudo chmod +x /usr/local/bin/docker-compose      
-      # sudo apt install -y nginx
-      # sudo systemctl enable nginx
-      # sudo systemctl start nginx
+      sudo apt install -y nginx
+      sudo systemctl enable nginx
+      sudo systemctl start nginx
 
       echo "Data --------------------------------------------------------"
       mkdir -p /home/guilhermeviegas1993/data/clean_data/{munic,micro,meso,rgime,rgint,state,region}
@@ -103,11 +103,7 @@ resource "google_compute_instance" "tf_computeinstance" {
       git config --global user.name "Gui-go"
 
       # Simple UI port 80 repo -----------------------------------------------"
-      sudo git clone https://github.com/personalVM/simple_web80.git
-      sudo git config --global --add safe.directory /home/guilhermeviegas1993/simple_web80
-      cd simple_web80
-      sudo docker-compose up -d
-      cd
+      ##
 
       echo "Personal RStudio repo -----------------------------------------------"
       sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/personal_rstudio.git /home/guilhermeviegas1993/personal_rstudio/
