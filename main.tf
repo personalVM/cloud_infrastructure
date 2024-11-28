@@ -6,6 +6,11 @@ locals {
   tag_owner    = "guilhermeviegas"
 }
 
+provider "google-beta" {
+  project     = local.proj_id
+  region      = local.location
+}
+
 module "network" {
   source    = "./modules/network"
   proj_name = local.proj_name

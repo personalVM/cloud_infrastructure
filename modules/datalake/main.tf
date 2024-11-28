@@ -1,6 +1,6 @@
 
 resource "google_storage_bucket" "tf_rawbucket" {
-  name          = "${var.proj_name}-rawbucket"
+  name          = "${var.proj_name}-raw-bucket"
   project       = var.proj_id
   location      = var.location
   storage_class = "COLDLINE" # NEARLINE COLDLINE ARCHIVE
@@ -21,7 +21,7 @@ resource "google_storage_bucket" "tf_rawbucket" {
 }
 
 resource "google_storage_bucket" "tf_cleanbucket" {
-  name          = "${var.proj_name}-cleanbucket"
+  name          = "${var.proj_name}-clean-bucket"
   project       = var.proj_id
   location      = var.location
   storage_class = "STANDARD"
@@ -37,7 +37,7 @@ resource "google_storage_bucket" "tf_cleanbucket" {
 }
 
 resource "google_storage_bucket" "tf_curatedbucket" {
-  name          = "${var.proj_name}-curatedbucket"
+  name          = "${var.proj_name}-curated-bucket"
   project       = var.proj_id
   location      = var.location
   storage_class = "STANDARD"

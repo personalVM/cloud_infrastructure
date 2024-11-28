@@ -1,20 +1,24 @@
 
 data "google_secret_manager_secret_version" "tf_mainuser" {
-  secret = "main-user"
+  project = var.proj_id
+  secret  = "main-user"
   version = "latest"
 }
 
 data "google_secret_manager_secret_version" "tf_mainsecret" {
-  secret = "main-passwd"
+  project = var.proj_id
+  secret  = "main-passwd"
   version = "latest"
 }
 
 data "google_secret_manager_secret_version" "tf_secretgitprivsshk" {
-  secret = "secret-gcp-ssh-key"
+  project = var.proj_id
+  secret  = "secret-gcp-ssh-key"
   version = "latest"
 }
 
 resource "google_compute_instance" "tf_computeinstance" {
+  project      = var.proj_id
   name         = "${var.proj_name}-computeinstance"
   machine_type = var.machine_type
   zone         = var.zone
@@ -55,6 +59,7 @@ resource "google_compute_instance" "tf_computeinstance" {
       #!/bin/bash
 
       sudo usermod -aG sudo guilhermeviegas1993
+      sudo -u guilhermeviegas1993 -i
 
       echo "Setting parameters ------------------------------------------"
       export HOME=/home/guilhermeviegas1993
@@ -86,7 +91,7 @@ resource "google_compute_instance" "tf_computeinstance" {
       echo "Data --------------------------------------------------------"
       mkdir -p /home/guilhermeviegas1993/data/clean_data/{munic,micro,meso,rgime,rgint,state,region}
       mkdir -p /home/guilhermeviegas1993/data/curated_data/{munic,micro,meso,rgime,rgint,state,region}
-      sudo chmod -R 777 /home/guilhermeviegas1993/data/
+      sudo chmod -R 775 /home/guilhermeviegas1993/data/
       sudo gsutil -m cp -r gs://${var.cleanbucket_name}/* /home/guilhermeviegas1993/data/clean_data
       # sudo gsutil -m cp -r gs://${var.curatedbucket_name}/* /home/guilhermeviegas1993/data/curated_data
 
@@ -103,10 +108,10 @@ resource "google_compute_instance" "tf_computeinstance" {
       git config --global user.name "Gui-go"
 
       # Simple UI port 80 repo -----------------------------------------------"
-      sudo -u guilhermeviegas1993 git git@github.com:personalVM/simple_web80.git
+      sudo -u guilhermeviegas1993 git clone https://github.com/personalVM/simple_web80.git
       sudo git config --global --add safe.directory /home/guilhermeviegas1993/simple_web80
       cd simple_web80/
-      docker-compose -f /home/guilhermeviegas1993/simple_web80/docker-compose.yaml up -d
+      docker-compose up -d
       cd
 
       echo "Personal RStudio repo -----------------------------------------------"
@@ -132,8 +137,8 @@ resource "google_compute_instance" "tf_computeinstance" {
         sudo git config --global user.email "guilhermeviegas1993@gmail.com"
         sudo git config --global user.name "Gui-go"
         sudo git config --global --add safe.directory /home/rstudio/volume/etl/
-        sudo chmod -R 777 /home/rstudio/volume/etl/
-        Rscript /home/rstudio/volume/etl/main_pipeline.R
+        sudo chmod -R 775 /home/rstudio/volume/ 
+        sudo chown -R rstudio:rstudio /home/rstudio/volume/
       '
 
       echo "ETL repo -----------------------------------------------"
@@ -148,20 +153,21 @@ resource "google_compute_instance" "tf_computeinstance" {
       sudo -u guilhermeviegas1993 ssh -T git@github.com
       sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/etl.git /home/guilhermeviegas1993/etl/
       # sudo chown -R guilhermeviegas1993:guilhermeviegas1993 /home/guilhermeviegas1993/etl
-      Rscript /home/rstudio/volume/etl/main_pipeline.R
+      sudo docker exec -t posit bash -c 'chown -R rstudio:rstudio /home/rstudio/volume/'
+      sudo docker exec -t posit bash -c 'Rscript /home/rstudio/volume/etl/main_pipeline.R'
 
       # echo "Geo Portfolio repo -----------------------------------------------"
       # sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/geo_portfolio.git /home/guilhermeviegas1993/geo_portfolio/
       # sudo git config --global --add safe.directory /home/guilhermeviegas1993/geo_portfolio
 
-      echo "Database repo -----------------------------------------------------"
-      sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/database.git /home/guilhermeviegas1993/database/
-      sudo git config --global --add safe.directory /home/guilhermeviegas1993/database
-      sudo env POSTGRES_USER=${data.google_secret_manager_secret_version.tf_mainuser.secret_data} \
-        POSTGRES_PASSWORD=${data.google_secret_manager_secret_version.tf_mainsecret.secret_data} \
-        GEOSERVER_ADMIN_USER=${data.google_secret_manager_secret_version.tf_mainuser.secret_data} \
-        GEOSERVER_ADMIN_PASSWORD=${data.google_secret_manager_secret_version.tf_mainsecret.secret_data} \
-        docker-compose -f /home/guilhermeviegas1993/database/docker-compose.yaml up -d
+      # echo "Database repo -----------------------------------------------------"
+      # sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/database.git /home/guilhermeviegas1993/database/
+      # sudo git config --global --add safe.directory /home/guilhermeviegas1993/database
+      # sudo env POSTGRES_USER=${data.google_secret_manager_secret_version.tf_mainuser.secret_data} \
+      #   POSTGRES_PASSWORD=${data.google_secret_manager_secret_version.tf_mainsecret.secret_data} \
+      #   GEOSERVER_ADMIN_USER=${data.google_secret_manager_secret_version.tf_mainuser.secret_data} \
+      #   GEOSERVER_ADMIN_PASSWORD=${data.google_secret_manager_secret_version.tf_mainsecret.secret_data} \
+      #   docker-compose -f /home/guilhermeviegas1993/database/docker-compose.yaml up -d
 
       # sudo gsutil -m cp -r /home/guilhermeviegas1993/data/curated_data/micro/* gs://personalvm-curatedbucket/micro
       # sudo gsutil -m cp -r gs://${var.curatedbucket_name}/* /home/guilhermeviegas1993/data/curated_data
@@ -181,6 +187,7 @@ resource "google_compute_instance" "tf_computeinstance" {
 }
 
 # resource "google_compute_disk" "tf_disk" {
+#   project = var.proj_id
 #   name  = "additional-disk"
 #   type  = "pd-ssd"
 #   size  = 200
@@ -188,6 +195,7 @@ resource "google_compute_instance" "tf_computeinstance" {
 # }
 
 resource "google_service_account" "tf_computeinstance_service_account" {
+  project      = var.proj_id
   account_id   = "${var.proj_name}-serviceaccount"
   display_name = "Service account for VM to access GCS"
 }

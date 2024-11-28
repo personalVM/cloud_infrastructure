@@ -28,6 +28,12 @@ terraform state list
 
 terraform state show module.network.google_dns_record_set.tf_a_record
 
+# Get a graph viz:
+terraform graph | dot -Tsvg > graph.svg
+
+
+
+
 gcloud compute ssh personalvm-computeinstance --zone us-west4-b
 
 
