@@ -35,7 +35,7 @@ terraform graph | dot -Tsvg > graph.svg
 
 
 gcloud compute ssh personalvm-computeinstance --zone us-west4-b
-
+gcloud compute ssh --project=personalvm1 --zone=us-west4-b personalvm-computeinstance
 
 
 --
@@ -105,3 +105,13 @@ SELECT * FROM table_name LIMIT 10;
 SELECT version();
 \du
 
+-----------------
+
+bq show --schema --format=prettyjson gold.table_search7 > schema.json
+cat schema.json
+bq mk --table gold.table_search9 schema.json
+bq query --use_legacy_sql=false 'INSERT INTO `gold.table_search9` SELECT * FROM `gold.table_search7`'
+
+-----------------
+
+gsutil ls -r gs://personalvm-docs-bucket/Guilherme_Viegas

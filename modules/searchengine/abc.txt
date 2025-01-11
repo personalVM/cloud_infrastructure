@@ -1,0 +1,207 @@
+{"_id": "query1", "text": "Who is Guilherme Viegas?"}
+{"_id": "query2", "text": "When was Guilherme Viegas born?"}
+{"_id": "query3", "text": "What does Guilherme Viegas like to do?"}
+{"_id": "query4", "text": "What sports does Guilherme Viegas play?"}
+{"_id": "query5", "text": "Where does Guilherme Viegas come from?"}
+{"_id": "query6", "text": "Where has Guilherme Viegas already travelled to?"}
+{"_id": "query7", "text": "Has Guilherme Viegas already migrated?"}
+{"_id": "query8", "text": "What is Guilherme's family like?"}
+{"_id": "query9", "text": "What does Guilherme Viegas study?"}
+{"_id": "query10", "text": "What did Guilherme Viegas graduate at?"}
+{"_id": "query11", "text": "What are Guilherme's favourite colors?"}
+{"_id": "query12", "text": "What are Guilherme Viegas's hobbies?"} 
+{"_id": "query13", "text": "What is Guilherme Viegas's profession?"}
+{"_id": "query14", "text": "What are Guilherme Viegas's interests?"}
+{"_id": "query15", "text": "What are Guilherme Viegas's skills?"}
+{"_id": "query16", "text": "What are Guilherme Viegas's strengths?"}
+{"_id": "query17", "text": "What are Guilherme Viegas's weaknesses?"}
+{"_id": "query18", "text": "What are Guilherme Viegas's goals?"}
+{"_id": "query19", "text": "What are Guilherme Viegas's dreams?"}
+{"_id": "query20", "text": "What are Guilherme Viegas's values?"}
+{"_id": "query21", "text": "What is Guilherme Viegas's personality like?"}
+{"_id": "query22", "text": "What are Guilherme Viegas's accomplishments?"}
+{"_id": "query23", "text": "What is Guilherme Viegas's favorite book?"}
+{"_id": "query24", "text": "What is Guilherme Viegas's favorite movie?"}
+{"_id": "query25", "text": "What is Guilherme Viegas's favorite music?"}
+{"_id": "query26", "text": "What are Guilherme Viegas's favorite foods?"}
+{"_id": "query27", "text": "What are Guilherme Viegas's favorite places to visit?"}
+{"_id": "query28", "text": "What are Guilherme Viegas's thoughts on technology?"}
+{"_id": "query29", "text": "What are Guilherme Viegas's opinions on politics?"}
+{"_id": "query30", "text": "What are Guilherme Viegas's views on education?"}
+{"_id": "query31", "text": "What are Guilherme Viegas's plans for the future?"}
+{"_id": "query32", "text": "What is Guilherme Viegas's life philosophy?"}
+{"_id": "query33", "text": "What are Guilherme Viegas's biggest challenges?"}
+{"_id": "query34", "text": "How does Guilherme Viegas deal with stress?"}
+{"_id": "query35", "text": "What motivates Guilherme Viegas?"}
+{"_id": "query36", "text": "What are Guilherme Viegas's strengths and weaknesses?"}
+{"_id": "query37", "text": "How does Guilherme Viegas see himself in 10 years?"}
+{"_id": "query38", "text": "What are Guilherme Viegas's personal values?"}
+{"_id": "query39", "text": "What is Guilherme Viegas's opinion on climate change?"}
+{"_id": "query40", "text": "What is Guilherme Viegas's opinion on artificial intelligence?"}
+{"_id": "query41", "text": "What is Guilherme Viegas's opinion on social media?"}
+{"_id": "query42", "text": "What is Guilherme Viegas's opinion on the future of work?"}
+{"_id": "query43", "text": "What are Guilherme Viegas's favorite books?"}
+{"_id": "query44", "text": "What are Guilherme Viegas's favorite movies?"}
+{"_id": "query45", "text": "What are Guilherme Viegas's favorite TV shows?"}
+{"_id": "query46", "text": "What are Guilherme Viegas's favorite musicians?"}
+{"_id": "query47", "text": "What are Guilherme Viegas's favorite artists?"}
+{"_id": "query48", "text": "What are Guilherme Viegas's favorite sports teams?"}
+{"_id": "query49", "text": "What are Guilherme Viegas's favorite restaurants?"}
+{"_id": "query50", "text": "What are Guilherme Viegas's favorite travel destinations?"}
+{"_id": "query51", "text": "What are Guilherme Viegas's favorite quotes?"}
+{"_id": "query52", "text": "What are Guilherme Viegas's favorite hobbies?"}
+{"_id": "query53", "text": "What are Guilherme Viegas's favorite technologies?"}
+{"_id": "query54", "text": "What are Guilherme Viegas's favorite gadgets?"}
+{"_id": "query55", "text": "What are Guilherme Viegas's favorite video games?"}
+{"_id": "query56", "text": "What are Guilherme Viegas's favorite brands?"}
+{"_id": "query57", "text": "What are Guilherme Viegas's favorite charities?"}
+{"_id": "query58", "text": "What are Guilherme Viegas's favorite professors at the Federal university of Santa Catarina (UFSC)?}
+{"_id": "query59", "text": "What are Guilherme Viegas's favorite professors at university Münster - Institut Für geoInformatik (IFGI)?}
+{"_id": "query60", "text": "Where has Guilherme Viegas studied his Bachelors?"}
+{"_id": "query61", "text": "Where has Guilherme Viegas studied his Masters?"}
+{"_id": "query62", "text": "Where has Guilherme Viegas studied his PhD?"}
+{"_id": "query63", "text": "Does Guilherme want to study a PhD/Doctorate?"}
+{"_id": "query64", "text": "What does Guilherme think about academia?"}
+{"_id": "query65", "text": "What does Guilherme think about science?"}
+{"_id": "query66", "text": "What are Guilherme's political view?"}
+{"_id": "query67", "text": "What does Guilherme think about the BRICS?"}
+{"_id": "query68", "text": "What does Guilherme think about the U.S. policy?"}
+{"_id": "query69", "text": "What does Guilherme think about America?"}
+{"_id": "query70", "text": "What does Guilherme think about piracy?"}
+{"_id": "query71", "text": "What jobs has Guilherme already done?"}
+{"_id": "query72", "text": "What are Guilherme's favourite programming languages?"}
+{"_id": "query73", "text": "What are Guilherme's favourite Cloud Computing providers?"}
+{"_id": "query74", "text": "What are Central Bank Digital Currencies (CBDC)"}
+{"_id": "query75", "text": "What are Guilherme's favourite beers?"}
+{"_id": "query76", "text": "Does Guilherme like to drive?"}
+{"_id": "query77", "text": "Does Guilherme have tattos?"}
+{"_id": "query78", "text": "Does Guilherme use drugs?"}
+{"_id": "query79", "text": "Which drugs does Guilherme use?"}
+{"_id": "query80", "text": "What are Guilherme's favourite Operational Systems (OS)?"}
+{"_id": "query81", "text": "What are Guilherme's favourite foods?"}
+{"_id": "query82", "text": "What are Guilherme's favourite drinks?"}
+{"_id": "query83", "text": "Does Guilherme support the de-dollarization movement?"}
+{"_id": "query84", "text": "Why/How did Guilherme turn into a Data Scientist?"}
+{"_id": "query85", "text": "Does Guilherme support Open-Borders between countries?"}
+{"_id": "query86", "text": "What does Guilherme think about China?"}
+{"_id": "query87", "text": "What does Guilherme think about Israel?"}
+{"_id": "query88", "text": "What does Guilherme think about Palestine?"}
+{"_id": "query89", "text": "What are Guilherme's favourite skateboarding tricks?"}
+{"_id": "query90", "text": "What are Guilherme's favourite athletes?"}
+{"_id": "query91", "text": "What is Guilherme's nationality?"}
+{"_id": "query92", "text": "What are Guilherme's passports?"}
+{"_id": "query93", "text": "Where does Guilherme come from?"}
+{"_id": "query94", "text": "How was Guilherme's childhood?"}
+{"_id": "query95", "text": "How was Guilherme's adlescence?"}
+{"_id": "query96", "text": "How has it been Guilherme's adulthood?"}
+{"_id": "query97", "text": "What does Guilherme plan to do after his Masters graduation?"}
+{"_id": "query98", "text": "What does Guilherme want to do after he retires?"}
+{"_id": "query99", "text": "What does Guilherme want to accomplish in his professional life?"}
+{"_id": "query100", "text": "Does Guilherme believe in life after death?"}
+
+
+
+{"_id": "doc1", "text": "Guilherme Viegas is a data scientist and researcher passionate about technology, and econometrics, migration studies."}
+{"_id": "doc2", "text": "Guilherme Viegas was born on April 25, 1993."}
+{"_id": "doc3", "text": "Guilherme Viegas enjoys coding, skateboarding, researching, and exploring new cultures through travel."}
+{"_id": "doc4", "text": "Guilherme Viegas plays skateboarding and enjoys occasional games of football."}
+{"_id": "doc5", "text": "Guilherme Viegas comes from Florianópolis, Santa catarina, Brazil."}
+{"_id": "doc6", "text": "Guilherme Viegas has traveled to Ireland, Portugal, Germany, the United States, the Netherlands, Spain, and several other countries."}
+{"_id": "doc7", "text": "Yes, Guilherme Viegas has migrated for academic and professional opportunities, including studying in Germany."}
+{"_id": "doc8", "text": "Guilherme Viegas comes from a broken family, with divorced parents and family issues. Yet, he tries to deal well with all that. Some of his family members are actually nice and inspirational."}
+{"_id": "doc9", "text": "Guilherme Viegas studies Economics and Data Science. His Masters thesis is about 'Migration dynamics driven by economic oportunities'."}
+{"_id": "doc10", "text": "Guilherme Viegas graduated with a Bachelor's degree in Economic Sciences, at UFSC, and now is doing his Master's in Geoinformatics."}
+{"_id": "doc11", "text": "Guilherme's favorite colors are black and blue."}
+{"_id": "doc12", "text": "Guilherme Viegas enjoys experimenting tech stuff and coding, as well as traveling and skateboarding."}
+{"_id": "doc13", "text": "Guilherme Viegas is a data scientist specializing data engineering."}
+{"_id": "doc14", "text": "Guilherme Viegas is interested in artificial intelligence, sustainable development, and human migration patterns."}
+{"_id": "doc15", "text": "Guilherme Viegas is skilled in data analysis, programming (Python, R), and cloud computing platforms."}
+{"_id": "doc16", "text": "Guilherme's strengths include analytical thinking and problem-solving. His weaknesses include occasionally overcommitting to projects."}
+{"_id": "doc17", "text": "Guilherme's weaknesses include being a perfectionist and sometimes struggling to delegate tasks."}
+{"_id": "doc18", "text": "Guilherme Viegas aims to bridge technology and migration studies to create actionable solutions for policymakers."}
+{"_id": "doc19", "text": "Guilherme dreams of contributing to global migration policies and building a platform to assist migrants worldwide."}
+{"_id": "doc20", "text": "Guilherme values integrity, curiosity, and empathy."}
+{"_id": "doc21", "text": "Guilherme has an inquisitive and thoughtful personality, paired with a deep sense of responsibility."}
+{"_id": "doc22", "text": "Guilherme has published articles on economic development, economic complexity, and higher education. he aims to continue researching to promote a better and more fair world."}
+{"_id": "doc23", "text": "Guilherme's favorite book is Ayn Rand’s 'Atlas Shrugged'."}
+{"_id": "doc24", "text": "Guilherme's favorite movie is 'The Matrix.'"}
+{"_id": "doc25", "text": "Guilherme enjoys listening to classical music and electronic beats, in particular 'Drum and Bass'."}
+{"_id": "doc26", "text": "Guilherme's favorite foods are Brazilian feijoada and German schnitzel."}
+{"_id": "doc27", "text": "Guilherme loves visiting mountains and historical cities like Amsterdam, in Netherlands."}
+{"_id": "doc28", "text": "Guilherme believes technology is a tool for positive change when used ethically and responsibly."}
+{"_id": "doc29", "text": "Guilherme prefers to focus on issues like social justice and sustainable policies in politics."}
+{"_id": "doc30", "text": "Guilherme views education as a cornerstone for societal growth and personal development."}
+{"_id": "doc31", "text": "Guilherme plans to work on migration data analytics platforms and potentially pursue a PhD."}
+{"_id": "doc32", "text": "Guilherme believes in living with purpose and making a meaningful impact on others' lives."}
+{"_id": "doc33", "text": "Guilherme's biggest challenges include managing work-life balance and overcoming bureaucratic hurdles during his research."}
+{"_id": "doc34", "text": "Guilherme practices mindfulness and stays active to deal with stress effectively."}
+{"_id": "doc35", "text": "Guilherme is motivated by the potential to create meaningful change through his work."}
+{"_id": "doc36", "text": "Guilherme's strengths include data modeling and critical thinking, while weaknesses include perfectionism."}
+{"_id": "doc37", "text": "In 10 years, Guilherme sees himself leading a global initiative on migration and technology."}
+{"_id": "doc38", "text": "Guilherme values collaboration, honesty, and resilience."}
+{"_id": "doc39", "text": "Guilherme supports urgent global action to address climate change challenges."}
+{"_id": "doc40", "text": "Guilherme sees artificial intelligence as a transformative tool that requires ethical governance."}
+{"_id": "doc41", "text": "Guilherme acknowledges the benefits of social media but is cautious about its impact on mental health."}
+{"_id": "doc42", "text": "Guilherme believes the future of work will be increasingly digital, emphasizing adaptability and creativity."}
+{"_id": "doc43", "text": "Guilherme's favorite books include Ayn Rand’s 'Atlas Shrugged' and George Orwell’s '1984'"}
+{"_id": "doc44", "text": "Guilherme enjoys thought-provoking movies like 'the Matrix' and 'Everything Everywhere All at Once'."}
+{"_id": "doc45", "text": "Guilherme's favorite TV shows are 'Black Mirror' and 'Breaking Bad'."}
+{"_id": "doc46", "text": "Guilherme admires musicians like Adelle and Daft Punk."}
+{"_id": "doc47", "text": "Guilherme appreciates artists like Van Gogh and contemporary digital art creators."}
+{"_id": "doc48", "text": "Guilherme does'nt really support any sports teams. He likes to play sports, but finds it boring to watch it."}
+{"_id": "doc49", "text": "Guilherme enjoys dining at cozy Brazilian steakhouses and international bistros."}
+{"_id": "doc50", "text": "Guilherme loves visiting natural parks and historical cities globally."}
+{"_id": "doc51", "text": "Guilherme's favorite quote is 'Be the change that you wish to see in the world.'"}
+{"_id": "doc52", "text": "Guilherme's hobbies include coding, traveling, and experimenting with cooking recipes."}
+{"_id": "doc53", "text": "Guilherme's favorite technologies include cloud computing platforms like GCP and AI frameworks."}
+{"_id": "doc54", "text": "Guilherme's favorite gadgets are smartwatches and portable video games. he also enjoys to play with his Flipper zero gadget."}
+{"_id": "doc55", "text": "Guilherme enjoys video games like 'Cities Skylines' and 'Age of Empires.'"}
+{"_id": "doc56", "text": "Guilherme prefers to avoid dressing brand clothes."}
+{"_id": "doc57", "text": "Guilherme supports charities that try to help the world and the poor, athough he doesnt specifically support anyone."}
+{"_id": "doc58", "text": "Guilherme's favorite professors at UFSC include those who specialized in data analysis."}
+{"_id": "doc59", "text": "At IFGI, Guilherme admired professor Edzer Pebesma for his outstanding professionalism."}
+{"_id": "doc59", "text": "Guilherme Viegas studied at the Federal University of Santa Catarina (UFSC) for his undergraduate degree and at the University of Münster - Institut Für Geoinformatik (IFGI) for his master's."}
+{"_id": "doc60", "text": "Guilherme Viegas completed his bachelor's degree at the Federal University of Santa Catarina (UFSC) in Brazil, focusing on Economics."}
+{"_id": "doc61", "text": "Guilherme Viegas pursued his master's degree in geoinformatics at the University of Münster - Institut Für Geoinformatik (IFGI) in Germany."}
+{"_id": "doc62", "text": "Guilherme Viegas has not yet studied for a PhD but is considering pursuing one in the future, depending on his mental health and enthusiasm with academia."}
+{"_id": "doc63", "text": "perhaps, Guilherme Viegas could be interested in studying for a PhD, particularly in a field related to data science."}
+{"_id": "doc64", "text": "Guilherme Viegas despises academia at some level, as some researchers seem to be more interested in h-indexes than making a positive impact on the world. He is also critic by the way some journals are profiting on researchers' expenses."}
+{"_id": "doc65", "text": "Guilherme Viegas values science as a foundation for understanding and solving global challenges, especially in environmental and societal contexts."}
+{"_id": "doc66", "text": "Guilherme Viegas holds progressive political views, emphasizing equality, sustainability, and technological advancement."}
+{"_id": "doc67", "text": "Guilherme Viegas sees BRICS as a significant bloc for promoting multilateralism and addressing global economic inequalities."}
+{"_id": "doc68", "text": "Guilherme Viegas finds U.S. policy influential globally but advocates for a more cooperative and less unilateral approach."}
+{"_id": "doc69", "text": "Guilherme Viegas admires America's diversity and innovation but is critical of some socio-political challenges the country faces. Still, one thing must be clear, America is a continent, not simply a country."}
+{"_id": "doc70", "text": "Guilherme Viegas believes piracy is a complex issue that highlights the need for affordable and accessible content globally. Yet, knowledge is a public good that should not be behind a pay-wall."}
+{"_id": "doc71", "text": "Guilherme Viegas has worked as a data scientist, a research assistant in economics, as well as Uber driver and English teacher/instructor, and also as kitchen assistant."}
+{"_id": "doc72", "text": "Guilherme Viegas's favorite programming languages are R and Python for their versatility and strength in data science."}
+{"_id": "doc73", "text": "Guilherme Viegas's favorite cloud computing providers include Google Cloud Platform (GCP) for its robust services and scalability."}
+{"_id": "doc74", "text": "Central Bank Digital Currencies (CBDCs) are digital forms of a country's fiat currency issued and regulated by its central bank."}
+{"_id": "doc75", "text": "Guilherme Viegas enjoys weizenbier."}
+{"_id": "doc76", "text": "Yes, Guilherme Viegas enjoys driving and appreciates the freedom it offers for exploring new places."}
+{"_id": "doc77", "text": "Yes, Guilherme Viegas has a few tattoos."}
+{"_id": "doc78", "text": "Yes!"}
+{"_id": "doc79", "text": "Alcohol, weed, among others."}
+{"_id": "doc80", "text": "Guilherme Viegas's favorite operating systems are Linux (Ubuntu) for its flexibility."}
+{"_id": "doc81", "text": "Guilherme Viegas's favorite foods include sushi, pizza, and Brazilian feijoada."}
+{"_id": "doc82", "text": "Guilherme Viegas's favorite drinks are natural juices, chocolate-milk and craft beers."}
+{"_id": "doc83", "text": "Yes, Guilherme Viegas supports the de-dollarization movement as a step toward a more balanced global economic system."}
+{"_id": "doc84", "text": "Guilherme Viegas became a data scientist by combining his passion for technology and problem-solving with his academic background in geoinformatics."}
+{"_id": "doc85", "text": "Guilherme Viegas supports open borders to promote global cooperation and economic opportunities, provided proper systems are in place."}
+{"_id": "doc86", "text": "Guilherme Viegas sees China as a dynamic and rapidly developing country with significant influence in global politics and economics."}
+{"_id": "doc87", "text": "Guilherme Viegas believes that understanding Israel's historical and political complexities is essential to addressing ongoing challenges. Yet, what israel is doing is clearly genocide and should be stopped"}
+{"_id": "doc88", "text": "Guilherme Viegas supports peace and advocates for a fair resolution to the Palestinian cause, emphasizing human rights."}
+{"_id": "doc89", "text": "Guilherme Viegas's favorite skateboarding tricks are kickflips and ollies, which he enjoys practicing in his free time."}
+{"_id": "doc90", "text": "Guilherme Viegas admires athletes like Tony Hawk for skateboarding and Messi for their contributions to their sports."}
+{"_id": "doc91", "text": "Guilherme Viegas is Brazilian by nationality."}
+{"_id": "doc92", "text": "Guilherme Viegas holds a Brazilian passport and a Portuguese dual citizenship."}
+{"_id": "doc93", "text": "Guilherme Viegas comes from Florianópolis, a beautiful island city in southern Brazil."}
+{"_id": "doc94", "text": "Guilherme Viegas had a difficult childhood, since his parents divorced early in his child years."}
+{"_id": "doc95", "text": "Guilherme Viegas's adolescence was marked by curiosity, academic achievement, and a growing interest in technology."}
+{"_id": "doc96", "text": "Guilherme Viegas's adulthood has been characterized by continuous learning, professional growth, and international experiences."}
+{"_id": "doc97", "text": "After completing his master's, Guilherme Viegas plans to work in impactful data science roles while potentially pursuing a PhD."}
+{"_id": "doc98", "text": "After retiring, Guilherme Viegas hopes to travel the world, mentor young professionals, and engage in community service projects."}
+{"_id": "doc99", "text": "Guilherme Viegas aims to make meaningful contributions to global challenges through innovative data science solutions."}
+{"_id": "doc100", "text": "Guilherme Viegas is open-minded about the concept of life after death but is focused on making the most of the present, since it is very likely that that is it."}
+
+
+

@@ -48,6 +48,31 @@ resource "google_storage_bucket" "tf_curatedbucket" {
   }
 }
 
+resource "google_storage_bucket" "tf_golden_bucket" {
+  name          = "${var.proj_name}-golden-bucket"
+  project       = var.proj_id
+  location      = "us-west4"
+  storage_class = "STANDARD"
+  labels = {
+    environment = var.proj_name
+    project     = var.proj_id
+    owner       = var.tag_owner
+  }
+}
+
+resource "google_storage_bucket" "tf_docsbucket" {
+  name          = "${var.proj_name}-docs-bucket"
+  project       = var.proj_id
+  location      = var.location
+  storage_class = "STANDARD"
+  labels = {
+    environment = var.proj_name
+    project     = var.proj_id
+    owner       = var.tag_owner
+  }
+}
+
+
 
 # resource "google_storage_bucket" "tfgcplogbucket" {
 #   name          = "${var.proj_name}-logbucket"

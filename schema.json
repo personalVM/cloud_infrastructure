@@ -1,0 +1,1 @@
+[{"mode":"REQUIRED","name":"id","type":"STRING"},{"mode":"NULLABLE","name":"gdp","type":"STRING"}]

@@ -23,7 +23,7 @@ resource "google_bigquery_table" "tf_bqtable_dflocations_micro" {
   table_id            = "df_locations_micro"
   deletion_protection = false
   external_data_configuration {
-    source_uris       = ["gs://personalvm-curatedbucket/micro/df_locations_micro.csv"]
+    source_uris       = ["gs://personalvm-curated-bucket/micro/df_locations_micro.csv"]
     source_format     = "CSV"
     autodetect        = true
   }
@@ -35,7 +35,7 @@ resource "google_bigquery_table" "tf_bqtable_dfexports_micro" {
   table_id            = "df_exports_micro"
   deletion_protection = false
   external_data_configuration {
-    source_uris       = ["gs://personalvm-curatedbucket/micro/df_exports_micro.csv"]
+    source_uris       = ["gs://personalvm-curated-bucket/micro/df_exports_micro.csv"]
     source_format     = "CSV"
     autodetect        = true
   }
@@ -47,7 +47,7 @@ resource "google_bigquery_table" "tf_bqtable_dfemigrants_micro" {
   table_id            = "df_emigrants_micro"
   deletion_protection = false
   external_data_configuration {
-    source_uris       = ["gs://personalvm-curatedbucket/micro/df_emigrants_micro.csv"]
+    source_uris       = ["gs://personalvm-curated-bucket/micro/df_emigrants_micro.csv"]
     source_format     = "CSV"
     autodetect        = true
   }
@@ -59,7 +59,7 @@ resource "google_bigquery_table" "tf_bqtable_dfeducation_micro" {
   table_id            = "df_education_micro"
   deletion_protection = false
   external_data_configuration {
-    source_uris       = ["gs://personalvm-curatedbucket/micro/df_education_micro.csv"]
+    source_uris       = ["gs://personalvm-curated-bucket/micro/df_education_micro.csv"]
     source_format     = "CSV"
     autodetect        = true
   }
@@ -71,7 +71,7 @@ resource "google_bigquery_table" "tf_bqtable_dfimmigrants_micro" {
   table_id            = "df_immigrants_micro"
   deletion_protection = false
   external_data_configuration {
-    source_uris       = ["gs://personalvm-curatedbucket/micro/df_immigrants_micro.csv"]
+    source_uris       = ["gs://personalvm-curated-bucket/micro/df_immigrants_micro.csv"]
     source_format     = "CSV"
     autodetect        = true
   }
@@ -83,11 +83,86 @@ resource "google_bigquery_table" "tf_bqtable_dfnationalAccounts_micro" {
   table_id            = "df_nationalAccounts_micro"
   deletion_protection = false
   external_data_configuration {
-    source_uris       = ["gs://personalvm-curatedbucket/micro/df_nationalAccounts_micro.csv"]
+    source_uris       = ["gs://personalvm-curated-bucket/micro/df_nationalAccounts_micro.csv"]
     source_format     = "CSV"
     autodetect        = true
   }
 }
+
+resource "google_bigquery_table" "tf_area_micro" {
+  project             = var.proj_id
+  dataset_id          = google_bigquery_dataset.tf_bqdataset_bronze.dataset_id
+  table_id            = "df_area_micro"
+  deletion_protection = false
+  external_data_configuration {
+    source_uris       = ["gs://personalvm-curated-bucket/micro/df_area_micro.csv"]
+    source_format     = "CSV"
+    autodetect        = true
+  }
+}
+
+resource "google_bigquery_table" "tf_cempre_micro" {
+  project             = var.proj_id
+  dataset_id          = google_bigquery_dataset.tf_bqdataset_bronze.dataset_id
+  table_id            = "df_cempre_micro"
+  deletion_protection = false
+  external_data_configuration {
+    source_uris       = ["gs://personalvm-curated-bucket/micro/df_cempre_micro.csv"]
+    source_format     = "CSV"
+    autodetect        = true
+  }
+}
+
+resource "google_bigquery_table" "tf_dcoast_micro" {
+  project             = var.proj_id
+  dataset_id          = google_bigquery_dataset.tf_bqdataset_bronze.dataset_id
+  table_id            = "df_dcoast_micro"
+  deletion_protection = false
+  external_data_configuration {
+    source_uris       = ["gs://personalvm-curated-bucket/micro/df_dcoast_micro.csv"]
+    source_format     = "CSV"
+    autodetect        = true
+  }
+}
+
+resource "google_bigquery_table" "tf_distance_micro" {
+  project             = var.proj_id
+  dataset_id          = google_bigquery_dataset.tf_bqdataset_bronze.dataset_id
+  table_id            = "df_distance_micro"
+  deletion_protection = false
+  external_data_configuration {
+    source_uris       = ["gs://personalvm-curated-bucket/micro/df_distance_micro.csv"]
+    source_format     = "CSV"
+    autodetect        = true
+  }
+}
+
+resource "google_bigquery_table" "tf_geoclass_micro" {
+  project             = var.proj_id
+  dataset_id          = google_bigquery_dataset.tf_bqdataset_bronze.dataset_id
+  table_id            = "df_geoclass_micro"
+  deletion_protection = false
+  external_data_configuration {
+    source_uris       = ["gs://personalvm-curated-bucket/micro/df_geoclass_micro.csv"]
+    source_format     = "CSV"
+    autodetect        = true
+  }
+}
+
+resource "google_bigquery_table" "tf_internalMigration_micro" {
+  project             = var.proj_id
+  dataset_id          = google_bigquery_dataset.tf_bqdataset_bronze.dataset_id
+  table_id            = "df_internalMigration_micro"
+  deletion_protection = false
+  external_data_configuration {
+    source_uris       = ["gs://personalvm-curated-bucket/micro/df_internalMigration_micro.csv"]
+    source_format     = "CSV"
+    autodetect        = true
+  }
+}
+
+
+# DATAFORM ------------------------------------
 
 #https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/dataform_repository
 resource "google_dataform_repository" "tf_bqdataform_repository" {

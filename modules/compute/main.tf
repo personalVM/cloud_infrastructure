@@ -91,7 +91,7 @@ resource "google_compute_instance" "tf_computeinstance" {
       echo "Data --------------------------------------------------------"
       mkdir -p /home/guilhermeviegas1993/data/clean_data/{munic,micro,meso,rgime,rgint,state,region}
       mkdir -p /home/guilhermeviegas1993/data/curated_data/{munic,micro,meso,rgime,rgint,state,region}
-      sudo chmod -R 775 /home/guilhermeviegas1993/data/
+      sudo chmod -R 777 /home/guilhermeviegas1993/data/
       sudo gsutil -m cp -r gs://${var.cleanbucket_name}/* /home/guilhermeviegas1993/data/clean_data
       # sudo gsutil -m cp -r gs://${var.curatedbucket_name}/* /home/guilhermeviegas1993/data/curated_data
 
@@ -108,10 +108,10 @@ resource "google_compute_instance" "tf_computeinstance" {
       git config --global user.name "Gui-go"
 
       # Simple UI port 80 repo -----------------------------------------------"
-      sudo -u guilhermeviegas1993 git clone https://github.com/personalVM/simple_web80.git
+      sudo -u guilhermeviegas1993 git clone https://github.com/personalVM/simple_web80.git /home/guilhermeviegas1993/simple_web80/
       sudo git config --global --add safe.directory /home/guilhermeviegas1993/simple_web80
       cd simple_web80/
-      docker-compose up -d
+      sudo docker-compose up -d
       cd
 
       echo "Personal RStudio repo -----------------------------------------------"
@@ -137,7 +137,8 @@ resource "google_compute_instance" "tf_computeinstance" {
         sudo git config --global user.email "guilhermeviegas1993@gmail.com"
         sudo git config --global user.name "Gui-go"
         sudo git config --global --add safe.directory /home/rstudio/volume/etl/
-        sudo chmod -R 775 /home/rstudio/volume/ 
+        sudo git config --global --add safe.directory /home/rstudio/volume/causal_models/
+        sudo chmod -R 777 /home/rstudio/volume/ 
         sudo chown -R rstudio:rstudio /home/rstudio/volume/
       '
 
@@ -155,6 +156,19 @@ resource "google_compute_instance" "tf_computeinstance" {
       # sudo chown -R guilhermeviegas1993:guilhermeviegas1993 /home/guilhermeviegas1993/etl
       sudo docker exec -t posit bash -c 'chown -R rstudio:rstudio /home/rstudio/volume/'
       sudo docker exec -t posit bash -c 'Rscript /home/rstudio/volume/etl/main_pipeline.R'
+      sudo gsutil -m cp -r /home/guilhermeviegas1993/data/curated_data/* gs://${var.curatedbucket_name}/
+      sudo gsutil -m cp -r /home/guilhermeviegas1993/data/curated_data/* gs://curated_bucket/exported-table.csv.gz
+
+      mkdir -p /home/guilhermeviegas1993/data/golden_data/{munic,micro,meso,rgime,rgint,state,region}
+      sudo gsutil -m cp -r gs://personalvm-golden-bucket/* /home/guilhermeviegas1993/data/golden_data/micro/
+      sudo gzip -d /home/guilhermeviegas1993/data/golden_data/micro/exported-table3.csv.gz
+
+      echo "Causal Models repo -----------------------------------------------"
+      sudo mkdir -p /home/guilhermeviegas1993/causal_models/
+      sudo chown -R guilhermeviegas1993:guilhermeviegas1993 /home/guilhermeviegas1993/causal_models
+      sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/causal_models.git /home/guilhermeviegas1993/causal_models/
+      sudo chown -R guilhermeviegas1993:guilhermeviegas1993 /home/guilhermeviegas1993/causal_models/
+      sudo docker exec -t posit bash -c 'chown -R rstudio:rstudio /home/rstudio/volume/causal_models/'
 
       # echo "Geo Portfolio repo -----------------------------------------------"
       # sudo -u guilhermeviegas1993 git clone git@github.com:personalVM/geo_portfolio.git /home/guilhermeviegas1993/geo_portfolio/
@@ -172,7 +186,6 @@ resource "google_compute_instance" "tf_computeinstance" {
       # sudo gsutil -m cp -r /home/guilhermeviegas1993/data/curated_data/micro/* gs://personalvm-curatedbucket/micro
       # sudo gsutil -m cp -r gs://${var.curatedbucket_name}/* /home/guilhermeviegas1993/data/curated_data
       # personalvm-curatedbucket
-
 
       # tail -f /var/log/cloud-init-output.log
 
@@ -212,3 +225,24 @@ resource "google_project_iam_member" "tf_computeinstance_storageCreator_access" 
   member  = "serviceAccount:${google_service_account.tf_computeinstance_service_account.email}"
 }
 
+
+#####
+# resource "google_project_iam_member" "tf_computeinstance_storageGet_access" {
+#   project = var.proj_id
+#   role    = "roles/storage.objectGet"
+#   member  = "serviceAccount:${google_service_account.tf_computeinstance_service_account.email}"
+# }
+
+# Missing required permissions: storage.objects.get
+
+# resource "google_project_service_account" "service_account" {
+#   project = google_project.project.project_id
+#   account_id = "terraform-sa"
+#   display_name = "Terraform Service Account"
+# }
+
+# resource "google_project_iam_member" "storage_object_viewer" {
+#   project = google_project.project.project_id
+#   role    = "roles/storage.objectViewer"
+#   member  = "serviceAccount:${google_project_service_account.service_account.email}"
+# }
